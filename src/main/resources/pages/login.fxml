@@ -37,11 +37,11 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <TextField fx:id="emailTfd" layoutX="302.0" layoutY="149.0" prefHeight="25.0" prefWidth="250.0" promptText="Email" style="-fx-alignment: #a14f0c;">
+      <TextField fx:id="emailTfd" layoutX="302.0" layoutY="149.0" prefHeight="25.0" prefWidth="250.0" promptText="Email" style="-fx-border-color: #a14f0c;">
          <opaqueInsets>
             <Insets top="10.0" />
          </opaqueInsets></TextField>
-      <PasswordField fx:id="passwordTfd" layoutX="301.0" layoutY="220.0" prefHeight="25.0" prefWidth="250.0" promptText="mot de passe">
+      <PasswordField fx:id="passwordTfd" layoutX="301.0" layoutY="220.0" prefHeight="25.0" prefWidth="250.0" promptText="mot de passe" style="-fx-border-color: #a14f0c;">
          <opaqueInsets>
             <Insets bottom="10.0" />
          </opaqueInsets></PasswordField>
@@ -59,6 +59,11 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
+      <ImageView fx:id="exit" fitHeight="20.0" fitWidth="20.0" layoutX="577.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/exit.png" />
+         </image>
+      </ImageView>
    </children>
    <cursor>
       <Cursor fx:constant="MOVE" />

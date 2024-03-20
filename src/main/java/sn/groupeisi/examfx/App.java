@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import sn.groupeisi.examfx.dao.DBConnexion;
 
 public class App extends Application {
@@ -16,6 +17,8 @@ public class App extends Application {
         Scene scene = new Scene(parent);
         stage.setScene(scene);
         stage.setTitle("page de connexion");
+        stage.setResizable(false);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
     }
 

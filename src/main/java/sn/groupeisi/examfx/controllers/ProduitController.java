@@ -11,6 +11,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import sn.groupeisi.examfx.dao.DBConnexion;
 import sn.groupeisi.examfx.entities.Categorie;
@@ -65,6 +66,8 @@ public class ProduitController implements Initializable {
 
     @FXML
     private TextField quantiteTfd;
+    @FXML
+    private TextField champSearch;
 
     @FXML
     private TableColumn<Produit, Integer> quantitéCOL;
@@ -132,7 +135,25 @@ public class ProduitController implements Initializable {
 
     @FXML
     void Cgetsupprimer(ActionEvent event) {
+        String sql = "DELETE FROM produit WHERE idP = ?";
+        try{
+            db.initPrepar(sql);
 
+            //passage des valeur
+            db.getPstm().setInt(1, idPro);
+            //excution de la requete
+            db.executeMaj();
+            //fermeture
+            db.closeConnection();
+            loadTable();
+            clear();
+            PenregisterBtn.setDisable(false);
+            Notification.NotifSuccess("Succés","Produit supprimer");
+
+
+        }catch (SQLException e){
+            throw new RuntimeException();
+        }
     }
 
     @FXML
@@ -176,6 +197,29 @@ public class ProduitController implements Initializable {
         return produits;
     }
 
+    public ObservableList<Produit> getProduitContains(String mot){
+        ObservableList<Produit> produits = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM produit WHERE libelle LIKE '%"+mot+"%'";
+        try {
+            db.initPrepar(sql);
+            ResultSet rs = db.executeSelect();
+            while (rs.next()){
+                Produit produit = new Produit();
+                produit.setIdP(rs.getInt("idP"));
+                produit.setLibelle(rs.getString("libelle"));
+                produit.setQuantite(rs.getInt("quantite"));
+                produit.setPrix(rs.getInt("prix"));
+                produit.setIdCat(rs.getInt("idCat"));
+                produits.add(produit);
+            }
+            db.closeConnection();
+
+        }catch (SQLException e){
+            throw new RuntimeException();
+        }
+        return produits;
+    }
+
     public void loadTable(){
         ObservableList<Produit> liste = getProduit();
         produitTB.setItems(liste);
@@ -186,4 +230,20 @@ public class ProduitController implements Initializable {
         catégorieCOL.setCellValueFactory(new PropertyValueFactory<Produit, Integer>("idCat"));
 
     }
+
+    @FXML
+    void onSearch(KeyEvent event) {
+        ObservableList<Produit> liste = getProduitContains(champSearch.getText());
+
+        idColP.setCellValueFactory(new PropertyValueFactory<Produit, Integer>("idP"));
+        libelleCOLP.setCellValueFactory(new PropertyValueFactory<Produit, String>("libelle"));
+        quantitéCOL.setCellValueFactory(new PropertyValueFactory<Produit, Integer>("quantite"));
+        prixCOL.setCellValueFactory(new PropertyValueFactory<Produit, Integer>("prix"));
+        catégorieCOL.setCellValueFactory(new PropertyValueFactory<Produit, Integer>("idCat"));
+        produitTB.setItems(liste);
+
+    }
+
+
+
 }

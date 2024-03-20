@@ -2,9 +2,11 @@ package sn.groupeisi.examfx.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import sn.groupeisi.examfx.dao.IUser;
 import sn.groupeisi.examfx.dao.UserImpl;
 import sn.groupeisi.examfx.entities.User;
@@ -12,13 +14,17 @@ import sn.groupeisi.examfx.tools.Notification;
 import sn.groupeisi.examfx.tools.Outils;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class LoginController {
+public class LoginController implements Initializable {
 
     IUser userDao = new UserImpl();
 
     @FXML
     private Button connexionBtn;
+    @FXML
+    private ImageView exit;
 
     @FXML
     private TextField emailTfd;
@@ -58,4 +64,10 @@ public class LoginController {
         }
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        exit.setOnMouseClicked(event -> {
+            System.exit(0);
+        });
+    }
 }

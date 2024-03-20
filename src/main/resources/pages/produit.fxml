@@ -6,14 +6,15 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sn.groupeisi.examfx.controllers.ProduitController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" />
-      <AnchorPane layoutX="3.0" layoutY="139.0" prefHeight="57.0" prefWidth="604.0">
+      <AnchorPane layoutX="3.0" layoutY="172.0" prefHeight="57.0" prefWidth="604.0">
          <children>
             <Button fx:id="PenregisterBtn" layoutX="85.0" layoutY="16.0" mnemonicParsing="false" onAction="#Cgetenregister" style="-fx-background-color: #a14f0c;" text="Enregister" textFill="WHITE">
                <font>
@@ -37,13 +38,13 @@
             </Button>
          </children>
       </AnchorPane>
-      <TextField fx:id="PlibelleTfd" layoutX="47.0" layoutY="28.0" prefHeight="25.0" prefWidth="219.0" promptText="libellé" />
-      <Label layoutX="48.0" layoutY="11.0" text="LIbellé" textFill="#a14f0c">
+      <TextField fx:id="PlibelleTfd" layoutX="47.0" layoutY="82.0" prefHeight="25.0" prefWidth="219.0" promptText="libellé" style="-fx-border-color: #a14f0c;" />
+      <Label layoutX="48.0" layoutY="65.0" text="LIbellé" textFill="#a14f0c">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TableView fx:id="produitTB" layoutY="206.0" onMouseClicked="#getDataP" prefHeight="243.0" prefWidth="607.0">
+      <TableView fx:id="produitTB" layoutY="226.0" onMouseClicked="#getDataP" prefHeight="223.0" prefWidth="607.0">
          <columns>
             <TableColumn fx:id="idColP" prefWidth="51.333375215530396" text="#" />
             <TableColumn fx:id="libelleCOLP" prefWidth="142.66668319702148" text="Libellé" />
@@ -52,23 +53,29 @@
             <TableColumn fx:id="catégorieCOL" prefWidth="151.999989827474" text="Catégorie" />
          </columns>
       </TableView>
-      <TextField fx:id="quantiteTfd" layoutX="348.0" layoutY="28.0" prefHeight="25.0" prefWidth="219.0" promptText="quantité" />
-      <TextField fx:id="prixTfd" layoutX="348.0" layoutY="83.0" prefHeight="25.0" prefWidth="219.0" promptText="prix unitaire" />
-      <ComboBox fx:id="combocatégorie" layoutX="47.0" layoutY="83.0" prefHeight="25.0" prefWidth="219.0" promptText="séléctionner une catégorie" />
-      <Label layoutX="348.0" layoutY="11.0" text="Quantité" textFill="#a14f0c">
+      <TextField fx:id="quantiteTfd" layoutX="348.0" layoutY="82.0" prefHeight="25.0" prefWidth="219.0" promptText="quantité" style="-fx-border-color: #a14f0c;" />
+      <TextField fx:id="prixTfd" layoutX="348.0" layoutY="137.0" prefHeight="25.0" prefWidth="219.0" promptText="prix unitaire" style="-fx-border-color: #a14f0c;" />
+      <ComboBox fx:id="combocatégorie" layoutX="47.0" layoutY="137.0" prefHeight="25.0" prefWidth="219.0" promptText="séléctionner une catégorie" style="-fx-border-color: #a14f0c;" />
+      <Label layoutX="348.0" layoutY="65.0" text="Quantité" textFill="#a14f0c">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="354.0" layoutY="66.0" text="Prix" textFill="#a14f0c">
+      <Label layoutX="351.0" layoutY="120.0" text="Prix" textFill="#a14f0c">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="50.0" layoutY="66.0" text="Catégorie" textFill="#a14f0c">
+      <Label layoutX="50.0" layoutY="119.0" text="Catégorie" textFill="#a14f0c">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
+      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="451.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/rechercher.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="champSearch" layoutX="159.0" layoutY="11.0" onKeyReleased="#onSearch" prefHeight="28.0" prefWidth="289.0" promptText="Recherche" style="-fx-border-color: #a14f0c;" />
    </children>
 </AnchorPane>
