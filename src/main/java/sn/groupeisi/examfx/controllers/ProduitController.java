@@ -99,7 +99,7 @@ public class ProduitController implements Initializable {
             db.getPstm().setInt(3, Integer.parseInt(prixTfd.getText()));
             db.getPstm().setInt(4, getIdCat(combocatégorie.getValue().getLibelle()));
             //excution de la requete
-            db.executeMaj();
+            db.executeSelect();
             //fermeture
             db.closeConnection();
             loadTable();
@@ -117,10 +117,9 @@ public class ProduitController implements Initializable {
         db.getPstm().setString(1, libelle);
         ResultSet rs = db.executeSelect();
         //excution de la requete
-        db.executeMaj();
+        db.executeSelect();
         //fermeture
         db.closeConnection();
-
 
         return rs.getInt("idC");
     }
@@ -149,6 +148,9 @@ public class ProduitController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadTable();
+        CategorieController categorieController = new CategorieController();
+        ObservableList<Categorie> categories = categorieController.getCategorie();
+        combocatégorie.setItems(categories);
     }
 
     public ObservableList<Produit> getProduit(){

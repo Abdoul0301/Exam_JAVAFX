@@ -7,6 +7,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import sn.groupeisi.examfx.dao.DBConnexion;
 import sn.groupeisi.examfx.entities.User;
+import sn.groupeisi.examfx.tools.Notification;
 import sn.groupeisi.examfx.tools.Outils;
 
 import java.sql.ResultSet;
@@ -51,6 +52,10 @@ public class RegisterController {
 
     @FXML
     void getvaliderR(ActionEvent event) {
+        if (RemailTfd.getText().isEmpty() || RpasswordTfd.getText().isEmpty() || nomTfd.getText().isEmpty() || prenomTfd.getText().isEmpty() || RpasswordTfd.getText().isEmpty()) {
+            Notification.NotifError("Erreur", "Veuillez remplir les champs");
+            return;
+        }
         String sql="INSERT INTO user VALUES (NULL,?,?,?,?,?)";
         try{
             //initialisation de la requete

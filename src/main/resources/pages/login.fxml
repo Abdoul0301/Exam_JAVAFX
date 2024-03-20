@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -9,35 +11,56 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sn.groupeisi.examfx.controllers.LoginController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sn.groupeisi.examfx.controllers.LoginController">
    <children>
-      <AnchorPane prefHeight="400.0" prefWidth="206.0">
+      <AnchorPane prefHeight="414.0" prefWidth="273.0">
          <children>
-            <ImageView fitHeight="412.0" fitWidth="263.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="416.0" fitWidth="321.0" layoutX="-21.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/ma%20photo.jpg" />
+                  <Image url="@../images/photo.jpg" />
                </image>
             </ImageView>
          </children>
       </AnchorPane>
-      <Text layoutX="358.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CONNEXION">
+      <Text fill="#a14f0c" layoutX="360.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Se connecter">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="302.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email">
+      <Text fill="#a14f0c" layoutX="302.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="302.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mot de passe">
+      <Text fill="#a14f0c" layoutX="302.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mot de passe">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <TextField fx:id="emailTfd" layoutX="302.0" layoutY="144.0" prefHeight="25.0" prefWidth="250.0" promptText="Email" />
-      <PasswordField fx:id="passwordTfd" layoutX="302.0" layoutY="244.0" prefHeight="25.0" prefWidth="250.0" promptText="mot de passe" />
-      <Button fx:id="connexionBtn" layoutX="316.0" layoutY="310.0" mnemonicParsing="false" onAction="#getLogin" text="Se connecter" />
-      <Button fx:id="registerBtn" layoutX="453.0" layoutY="310.0" mnemonicParsing="false" onAction="#getRegister" prefHeight="25.0" prefWidth="85.0" text="S'inscrire" />
+      <TextField fx:id="emailTfd" layoutX="302.0" layoutY="149.0" prefHeight="25.0" prefWidth="250.0" promptText="Email" style="-fx-alignment: #a14f0c;">
+         <opaqueInsets>
+            <Insets top="10.0" />
+         </opaqueInsets></TextField>
+      <PasswordField fx:id="passwordTfd" layoutX="301.0" layoutY="220.0" prefHeight="25.0" prefWidth="250.0" promptText="mot de passe">
+         <opaqueInsets>
+            <Insets bottom="10.0" />
+         </opaqueInsets></PasswordField>
+      <Button fx:id="connexionBtn" layoutX="302.0" layoutY="303.0" mnemonicParsing="false" onAction="#getLogin" prefHeight="25.0" prefWidth="250.0" style="-fx-background-color: #a14f0c;" text="Se connecter" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="335.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/utilisateur.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="registerBtn" layoutX="302.0" layoutY="346.0" mnemonicParsing="false" onAction="#getRegister" prefHeight="25.0" prefWidth="250.0" style="-fx-background-color: #a14f0c;" text="S'inscrire" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
    </children>
+   <cursor>
+      <Cursor fx:constant="MOVE" />
+   </cursor>
 </AnchorPane>

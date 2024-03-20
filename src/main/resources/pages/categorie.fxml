@@ -9,42 +9,42 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="452.0" prefWidth="604.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sn.groupeisi.examfx.controllers.CategorieController">
+<AnchorPane prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sn.groupeisi.examfx.controllers.CategorieController">
    <children>
-      <AnchorPane layoutY="135.0" prefHeight="57.0" prefWidth="604.0">
+      <AnchorPane layoutX="1.0" layoutY="135.0" prefHeight="57.0" prefWidth="604.0">
          <children>
-            <Button fx:id="CenregisterBtn" layoutX="85.0" layoutY="16.0" mnemonicParsing="false" onAction="#Cgetenregister" text="Enregister">
+            <Button fx:id="CenregisterBtn" layoutX="85.0" layoutY="16.0" mnemonicParsing="false" onAction="#Cgetenregister" style="-fx-background-color: #a14f0c;" text="Enregister" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="CmodifierBtn" layoutX="198.0" layoutY="16.0" mnemonicParsing="false" onAction="#Cgetmodifier" prefHeight="29.0" prefWidth="81.0" text="Modifier">
+            <Button fx:id="CmodifierBtn" layoutX="198.0" layoutY="16.0" mnemonicParsing="false" onAction="#Cgetmodifier" prefHeight="29.0" prefWidth="81.0" style="-fx-background-color: #a14f0c;" text="Modifier" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="CsuprimerBtn" layoutX="311.0" layoutY="16.0" mnemonicParsing="false" onAction="#Cgetsupprimer" text="Supprimer">
+            <Button fx:id="CsuprimerBtn" layoutX="311.0" layoutY="16.0" mnemonicParsing="false" onAction="#Cgetsupprimer" style="-fx-background-color: #a14f0c;" text="Supprimer" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="CeffacerBtn" layoutX="422.0" layoutY="16.0" mnemonicParsing="false" onAction="#Cgeteffacer" prefHeight="29.0" prefWidth="83.0" text="Effacer">
+            <Button fx:id="CeffacerBtn" layoutX="422.0" layoutY="16.0" mnemonicParsing="false" onAction="#Cgeteffacer" prefHeight="29.0" prefWidth="83.0" style="-fx-background-color: #a14f0c;" text="Effacer" textFill="#f6f6f6">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
          </children>
       </AnchorPane>
-      <TextField fx:id="libelleTfd" layoutX="86.0" layoutY="65.0" prefHeight="25.0" prefWidth="420.0" />
-      <Label layoutX="86.0" layoutY="35.0" text="LIbellé">
+      <TextField fx:id="libelleTfd" layoutX="86.0" layoutY="41.0" prefHeight="25.0" prefWidth="420.0" style="-fx-alignment: #a14f0c;" />
+      <Label layoutX="86.0" layoutY="11.0" text="LIbellé" textFill="#a14f0c">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TableView fx:id="categorieTB" layoutX="86.0" layoutY="230.0" onMouseClicked="#getData" prefHeight="200.0" prefWidth="420.0">
+      <TableView fx:id="categorieTB" layoutX="1.0" layoutY="231.0" onMouseClicked="#getData" prefHeight="219.0" prefWidth="604.0">
         <columns>
           <TableColumn fx:id="idCol" prefWidth="100.66665649414062" text="#" />
-          <TableColumn fx:id="libelleCOL" prefWidth="317.33331298828125" text="Libellé" />
+          <TableColumn fx:id="libelleCOL" prefWidth="501.33336639404297" text="Libellé" />
         </columns>
       </TableView>
    </children>

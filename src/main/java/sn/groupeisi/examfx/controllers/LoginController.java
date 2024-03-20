@@ -36,7 +36,7 @@ public class LoginController {
             try {
                 if (user != null) {
                     Notification.NotifSuccess("Succés", "Connecxion réussie !");
-                    Outils.load(event, "Acceuil", "/pages/produit.fxml");
+                    Outils.load(event, "Acceuil", "/pages/acceuil.fxml");
                 } else {
                     Notification.NotifError("Erreur", "Email et/ou mot de passe incorrects !");
                 }

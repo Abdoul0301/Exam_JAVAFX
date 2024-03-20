@@ -10,63 +10,64 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="450.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sn.groupeisi.examfx.controllers.ProduitController">
+<AnchorPane prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sn.groupeisi.examfx.controllers.ProduitController">
    <children>
-      <AnchorPane layoutX="3.0" layoutY="185.0" prefHeight="57.0" prefWidth="604.0">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+      <AnchorPane layoutX="3.0" layoutY="139.0" prefHeight="57.0" prefWidth="604.0">
          <children>
-            <Button fx:id="PenregisterBtn" layoutX="85.0" layoutY="16.0" mnemonicParsing="false" onAction="#Cgetenregister" text="Enregister">
+            <Button fx:id="PenregisterBtn" layoutX="85.0" layoutY="16.0" mnemonicParsing="false" onAction="#Cgetenregister" style="-fx-background-color: #a14f0c;" text="Enregister" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="PmodifierBtn" layoutX="198.0" layoutY="16.0" mnemonicParsing="false" onAction="#Cgetmodifier" prefHeight="29.0" prefWidth="81.0" text="Modifier">
+            <Button fx:id="PmodifierBtn" layoutX="198.0" layoutY="16.0" mnemonicParsing="false" onAction="#Cgetmodifier" prefHeight="29.0" prefWidth="81.0" style="-fx-background-color: #a14f0c;" text="Modifier" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="PsuprimerBtn" layoutX="311.0" layoutY="16.0" mnemonicParsing="false" onAction="#Cgetsupprimer" text="Supprimer">
+            <Button fx:id="PsuprimerBtn" layoutX="311.0" layoutY="16.0" mnemonicParsing="false" onAction="#Cgetsupprimer" style="-fx-background-color: #a14f0c;" text="Supprimer" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="PeffacerBtn" layoutX="422.0" layoutY="16.0" mnemonicParsing="false" onAction="#Cgeteffacer" prefHeight="29.0" prefWidth="83.0" text="Effacer">
+            <Button fx:id="PeffacerBtn" layoutX="422.0" layoutY="16.0" mnemonicParsing="false" onAction="#Cgeteffacer" prefHeight="29.0" prefWidth="83.0" style="-fx-background-color: #a14f0c;" text="Effacer" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
          </children>
       </AnchorPane>
-      <TextField fx:id="PlibelleTfd" layoutX="47.0" layoutY="72.0" prefHeight="25.0" prefWidth="219.0" promptText="libellé" />
-      <Label layoutX="48.0" layoutY="55.0" text="LIbellé">
+      <TextField fx:id="PlibelleTfd" layoutX="47.0" layoutY="28.0" prefHeight="25.0" prefWidth="219.0" promptText="libellé" />
+      <Label layoutX="48.0" layoutY="11.0" text="LIbellé" textFill="#a14f0c">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TableView fx:id="produitTB" layoutX="42.0" layoutY="249.0" onMouseClicked="#getDataP" prefHeight="200.0" prefWidth="523.0">
+      <TableView fx:id="produitTB" layoutY="206.0" onMouseClicked="#getDataP" prefHeight="243.0" prefWidth="607.0">
          <columns>
             <TableColumn fx:id="idColP" prefWidth="51.333375215530396" text="#" />
-            <TableColumn fx:id="libelleCOLP" prefWidth="116.66669082641602" text="Libellé" />
-            <TableColumn fx:id="quantitéCOL" prefWidth="116.66669082641602" text="Quantité" />
-            <TableColumn fx:id="prixCOL" prefWidth="116.66669082641602" text="Prix Unitaire" />
-            <TableColumn fx:id="catégorieCOL" prefWidth="116.66669082641602" text="Catégorie" />
+            <TableColumn fx:id="libelleCOLP" prefWidth="142.66668319702148" text="Libellé" />
+            <TableColumn fx:id="quantitéCOL" prefWidth="124.00007629394531" text="Quantité" />
+            <TableColumn fx:id="prixCOL" prefWidth="134.0" text="Prix Unitaire" />
+            <TableColumn fx:id="catégorieCOL" prefWidth="151.999989827474" text="Catégorie" />
          </columns>
       </TableView>
-      <TextField fx:id="quantiteTfd" layoutX="348.0" layoutY="72.0" prefHeight="25.0" prefWidth="219.0" promptText="quantité" />
-      <Label layoutX="348.0" layoutY="55.0" text="Quantité">
+      <TextField fx:id="quantiteTfd" layoutX="348.0" layoutY="28.0" prefHeight="25.0" prefWidth="219.0" promptText="quantité" />
+      <TextField fx:id="prixTfd" layoutX="348.0" layoutY="83.0" prefHeight="25.0" prefWidth="219.0" promptText="prix unitaire" />
+      <ComboBox fx:id="combocatégorie" layoutX="47.0" layoutY="83.0" prefHeight="25.0" prefWidth="219.0" promptText="séléctionner une catégorie" />
+      <Label layoutX="348.0" layoutY="11.0" text="Quantité" textFill="#a14f0c">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="prixTfd" layoutX="348.0" layoutY="127.0" prefHeight="25.0" prefWidth="219.0" promptText="prix unitaire" />
-      <Label layoutX="348.0" layoutY="110.0" text="Prix">
+      <Label layoutX="354.0" layoutY="66.0" text="Prix" textFill="#a14f0c">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <ComboBox fx:id="combocatégorie" layoutX="47.0" layoutY="127.0" prefHeight="25.0" prefWidth="219.0" promptText="séléctionner une catégorie" />
-      <Label layoutX="48.0" layoutY="109.0" text="Catégorie">
+      <Label layoutX="50.0" layoutY="66.0" text="Catégorie" textFill="#a14f0c">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
    </children>
