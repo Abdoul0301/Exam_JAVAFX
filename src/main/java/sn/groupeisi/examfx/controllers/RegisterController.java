@@ -66,7 +66,7 @@ public class RegisterController {
             db.getPstm().setString(2,RpasswordTfd.getText());
             db.getPstm().setString(3,nomTfd.getText());
             db.getPstm().setString(4,prenomTfd.getText());
-            db.getPstm().setString(5,RpasswordTfd.getText());
+            db.getPstm().setString(5,telephoneTfd.getText());
 
 
             db.executeMaj();

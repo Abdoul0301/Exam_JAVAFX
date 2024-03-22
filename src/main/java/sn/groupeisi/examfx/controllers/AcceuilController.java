@@ -35,8 +35,10 @@ public class AcceuilController implements Initializable {
     private Label MenuBack;
 
 
+
+
     @FXML
-    void ACCEUIL(ActionEvent event) throws IOException {
+    void HOME(ActionEvent event) throws IOException {
         Parent fxml = FXMLLoader.load(getClass().getResource("/pages/statistique.fxml"));
         dynamique.getChildren().removeAll();
         dynamique.getChildren().setAll(fxml);
@@ -76,6 +78,12 @@ public class AcceuilController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            HOME(null); // Appel de la méthode HOME avec un événement null
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         exit.setOnMouseClicked(event -> {
             System.exit(0);
         });

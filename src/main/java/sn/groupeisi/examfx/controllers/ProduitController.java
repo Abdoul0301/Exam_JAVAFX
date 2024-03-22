@@ -13,7 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import sn.groupeisi.examfx.dao.DBConnexion;
+import sn.groupeisi.examfx.dao.*;
 import sn.groupeisi.examfx.entities.Categorie;
 import sn.groupeisi.examfx.entities.Produit;
 import sn.groupeisi.examfx.tools.Notification;
@@ -21,6 +21,7 @@ import sn.groupeisi.examfx.tools.Notification;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ProduitController implements Initializable {
@@ -28,6 +29,9 @@ public class ProduitController implements Initializable {
     private DBConnexion db = new DBConnexion();
     private ResultSet rs;
     private int idPro;
+    private ICategorie catdao = new CategorieImpl();
+    private IProduit prodao = new ProduitImpl();
+
     @FXML
     private Button PeffacerBtn;
 
@@ -44,7 +48,7 @@ public class ProduitController implements Initializable {
     private Button PsuprimerBtn;
 
     @FXML
-    private TableColumn<Produit, Integer> catégorieCOL;
+    private TableColumn<Produit, Categorie> catégorieCOL;
 
     @FXML
     private ComboBox<Categorie> combocatégorie;
@@ -92,44 +96,68 @@ public class ProduitController implements Initializable {
             return;
         }
 
-        String sql = "INSERT INTO produit VALUES (null, ?, ?, ?, ?)";
-        try{
-            db.initPrepar(sql);
+        Produit produit = new Produit();
+        produit.setLibelle(PlibelleTfd.getText());
+        int quantite = Integer.parseInt(quantiteTfd.getText());
+        int prix = Integer.parseInt(prixTfd.getText());
+        produit.setQuantite(quantite);
+        produit.setPrix(prix);
+        produit.setCategorie(combocatégorie.getValue());
+
+        int ok = prodao.add(produit);
+        if (ok != 0) {
+            lodProd();
+            clear();
+        } else {
+            Notification.NotifError("Erreur", "Erreur lors de l'enregistrement");
+
 
             //passage des valeur
-            db.getPstm().setString(1, PlibelleTfd.getText());
-            db.getPstm().setInt(2, Integer.parseInt(quantiteTfd.getText()));
-            db.getPstm().setInt(3, Integer.parseInt(prixTfd.getText()));
-            db.getPstm().setInt(4, getIdCat(combocatégorie.getValue().getLibelle()));
             //excution de la requete
             db.executeSelect();
             //fermeture
             db.closeConnection();
-            loadTable();
+
+
             clear();
-            Notification.NotifSuccess("Succés","produit enregistré");
+            Notification.NotifSuccess("Succés", "produit enregistré");
 
-        }catch (SQLException e){
-            throw new RuntimeException();
         }
-    }
 
-    private int getIdCat(String libelle) throws SQLException {
-        String sql = "SELECT idC FROM categorie WHERE libelle = ?";
-        db.initPrepar(sql);
-        db.getPstm().setString(1, libelle);
-        ResultSet rs = db.executeSelect();
-        //excution de la requete
-        db.executeSelect();
-        //fermeture
-        db.closeConnection();
-
-        return rs.getInt("idC");
     }
 
 
     @FXML
     void Cgetmodifier(ActionEvent event) {
+        String sql = "UPDATE produit SET libelle=?, prix=?, quantite=?, idCat=? WHERE idP=?";
+        try {
+            if(PlibelleTfd.getText().isEmpty() || prixTfd.getText().isEmpty() || quantiteTfd.getText().isEmpty() ) {
+                // Afficher une notification d'erreur indiquant que tous les champs doivent être remplis
+                Notification.NotifError("Erreur", "Veuillez remplir les champs");
+                return; // Arrêter le traitement car tous les champs ne sont pas remplis
+            }
+
+            db.initPrepar(sql);
+            db.getPstm().setString(1, PlibelleTfd.getText());
+            db.getPstm().setInt(2, Integer.parseInt(prixTfd.getText()));
+            db.getPstm().setInt(3, Integer.parseInt(quantiteTfd.getText()));
+            db.getPstm().setInt(4, combocatégorie.getValue().getIdC());
+            db.getPstm().setInt(5,idPro);
+
+            db.executeMaj();
+            db.closeConnection();
+            lodProd();
+            clear();
+            Notification.NotifSuccess("Succés","Catégorie modifier");
+
+        } catch (Exception ex) {
+            // Afficher une notification d'erreur en cas d'échec
+
+            Notification.NotifError("Erreur", "Erreur lors de la mise à jour du produit.");
+
+            ex.printStackTrace();
+        }
+        lodProd();
 
     }
 
@@ -145,7 +173,7 @@ public class ProduitController implements Initializable {
             db.executeMaj();
             //fermeture
             db.closeConnection();
-            loadTable();
+            lodProd();
             clear();
             PenregisterBtn.setDisable(false);
             Notification.NotifSuccess("Succés","Produit supprimer");
@@ -168,10 +196,16 @@ public class ProduitController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        loadTable();
-        CategorieController categorieController = new CategorieController();
-        ObservableList<Categorie> categories = categorieController.getCategorie();
-        combocatégorie.setItems(categories);
+        idColP.setCellValueFactory(new PropertyValueFactory<>("idP"));
+        libelleCOLP.setCellValueFactory(new PropertyValueFactory<>("libelle"));
+        quantitéCOL.setCellValueFactory(new PropertyValueFactory<>("quantite"));
+        prixCOL.setCellValueFactory(new PropertyValueFactory<>("prix"));
+        catégorieCOL.setCellValueFactory(new PropertyValueFactory<>("categorie"));
+
+
+
+        lodProd();
+        lodCat();
     }
 
     public ObservableList<Produit> getProduit(){
@@ -186,7 +220,7 @@ public class ProduitController implements Initializable {
                 produit.setLibelle(rs.getString("libelle"));
                 produit.setQuantite(rs.getInt("quantite"));
                 produit.setPrix(rs.getInt("prix"));
-                produit.setIdCat(rs.getInt("idCat"));
+                //produit.setIdCat(rs.getInt("idCat"));
                 produits.add(produit);
             }
             db.closeConnection();
@@ -209,7 +243,7 @@ public class ProduitController implements Initializable {
                 produit.setLibelle(rs.getString("libelle"));
                 produit.setQuantite(rs.getInt("quantite"));
                 produit.setPrix(rs.getInt("prix"));
-                produit.setIdCat(rs.getInt("idCat"));
+                //produit.setIdCat(rs.getInt("idCat"));
                 produits.add(produit);
             }
             db.closeConnection();
@@ -220,15 +254,32 @@ public class ProduitController implements Initializable {
         return produits;
     }
 
-    public void loadTable(){
+    /*public void loadTable(){
         ObservableList<Produit> liste = getProduit();
         produitTB.setItems(liste);
         idColP.setCellValueFactory(new PropertyValueFactory<Produit, Integer>("idP"));
         libelleCOLP.setCellValueFactory(new PropertyValueFactory<Produit, String>("libelle"));
         quantitéCOL.setCellValueFactory(new PropertyValueFactory<Produit, Integer>("quantite"));
         prixCOL.setCellValueFactory(new PropertyValueFactory<Produit, Integer>("prix"));
-        catégorieCOL.setCellValueFactory(new PropertyValueFactory<Produit, Integer>("idCat"));
+        catégorieCOL.setCellValueFactory(new PropertyValueFactory<>("idCat"));
 
+    }*/
+    public  void lodProd(){
+        ObservableList<Produit> produits = FXCollections.observableArrayList();
+        List<Produit> produitList = prodao.getAll();
+        for (Produit p :produitList){
+            produits.add(p);
+        }
+        produitTB.setItems(produits);
+    }
+
+    public  void lodCat(){
+        ObservableList<Categorie> categories = FXCollections.observableArrayList();
+        List<Categorie> produitList = catdao.getAll();
+        for (Categorie c :produitList){
+            categories.add(c);
+        }
+        combocatégorie.setItems(categories);
     }
 
     @FXML
@@ -239,7 +290,7 @@ public class ProduitController implements Initializable {
         libelleCOLP.setCellValueFactory(new PropertyValueFactory<Produit, String>("libelle"));
         quantitéCOL.setCellValueFactory(new PropertyValueFactory<Produit, Integer>("quantite"));
         prixCOL.setCellValueFactory(new PropertyValueFactory<Produit, Integer>("prix"));
-        catégorieCOL.setCellValueFactory(new PropertyValueFactory<Produit, Integer>("idCat"));
+        catégorieCOL.setCellValueFactory(new PropertyValueFactory<>("idCat"));
         produitTB.setItems(liste);
 
     }

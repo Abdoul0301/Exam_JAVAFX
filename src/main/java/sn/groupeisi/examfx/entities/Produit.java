@@ -5,17 +5,18 @@ public class Produit {
     private String libelle;
     private int quantite;
     private int prix;
-    private Integer idCat;
+    private Categorie categorie = new Categorie();
 
-    public Produit() {
-    }
 
-    public Produit(int idP, String libelle, int quantite, int prix, Integer idCat) {
+    public Produit(int idP, String libelle, int quantite, int prix, Categorie categorie) {
         this.idP = idP;
         this.libelle = libelle;
         this.quantite = quantite;
         this.prix = prix;
-        this.idCat = idCat;
+        this.categorie = categorie;
+    }
+
+    public Produit() {
     }
 
     public int getIdP() {
@@ -50,13 +51,11 @@ public class Produit {
         this.prix = prix;
     }
 
-    public Integer getIdCat() {
-        return idCat;
+    public Categorie getCategorie() {
+        return categorie;
     }
 
-    public void setIdCat(Integer idCat) {
-        this.idCat = idCat;
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
     }
-
-
 }
