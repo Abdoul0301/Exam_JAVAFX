@@ -3,7 +3,8 @@ module sn.groupeisi.examfx {
     requires javafx.fxml;
     requires java.sql;
     requires TrayTester;
-
+    requires org.apache.poi.ooxml;
+    requires itextpdf;
 
 
     opens sn.groupeisi.examfx to javafx.fxml;
